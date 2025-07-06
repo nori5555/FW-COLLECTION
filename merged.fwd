@@ -1,15 +1,5 @@
 {
   "title": "Forward Widgets 拼接合集",
-  "description": "自动拼接合并 - 最后更新: 2025-07-06 08:06:43 UTC",
-  "widgets": [
-    {
-      "id": "person.movie.tmdb",
-      "title": "TMDB人物影视作品",
-      "description": "获取 TMDB 的榜单数据",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.4",
-      "author": "Evan",
-      "url": "https://github.com/EmrysChoo/ForwardWidgets/raw/refs/heads/main/Widgets/person_movie.js"
-    }
-  ]
+  "description": "自动拼接合并 - 最后更新: 2025-07-06 08:46:32 UTC",
+  "widgets": []
 }
