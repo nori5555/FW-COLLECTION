@@ -1,7 +1,8 @@
 {
   "title": "pack1r's Widgets",
   "description": "A collection of widgets created by pack1r",
-  "icon": "https://github.com/pack1r/ForwardWidgets/raw/main/icon.png",
+  "icon": "原始地址：
+https://raw.githubusercontent.com/nori5555/FW-COLLECTION/fw.png",
   "widgets": [
   {
       "id": "forward.combined.media.lists",
