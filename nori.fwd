@@ -2,7 +2,7 @@
   "title": "NORI Widgets",
   "description": "A collection",
   "icon": 
-  "https://raw.githubusercontent.com/nori5555/ForwardWidgets/main/for.png",
+  "https://raw.githubusercontent.com/nori5555/ForwardWidgets/main/fd.png",
   "widgets": [
   {
       "id": "forward.combined.media.lists",
