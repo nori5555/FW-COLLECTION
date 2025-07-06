@@ -1,6 +1,13 @@
-https://github.com/EmrysChoo/ForwardWidgets/raw/refs/heads/main/person_Widgets.fwd
-https://raw.githubusercontent.com/huangxd-/ForwardWidgets/refs/heads/main/widgets.fwd
+https://raw.githubusercontent.com/pack1r/ForwardWidgets/refs/heads/main/widgets/combined.js
+https://raw.githubusercontent.com/huangxd-/ForwardWidgets/refs/heads/main/widgets/zhuijurili.js
 https://raw.githubusercontent.com/Madai-v/ForwardWidgets/refs/heads/main/Widgets/getPhCk.js
-https://raw.githubusercontent.com/quantumultxx/FW-Widgets/refs/heads/main/ForwardWidgets.fwd
+https://raw.githubusercontent.com/huangxd-/ForwardWidgets/refs/heads/main/widgets/trakt.js
 https://raw.githubusercontent.com/opix-maker/Forward/refs/heads/main/js/IMDb.js
-https://raw.githubusercontent.com/quantumultxx/FW-Widgets/refs/heads/main/ForwardWidgets.fwd
+https://raw.githubusercontent.com/huangxd-/ForwardWidgets/refs/heads/main/widgets/douban.js
+https://raw.githubusercontent.com/huangxd-/ForwardWidgets/refs/heads/main/widgets/yatu.js
+https://raw.githubusercontent.com/opix-maker/Forward/refs/heads/main/js/Bangumi_v2.0.0.js
+https://raw.githubusercontent.com/bemarkt/scripts/refs/heads/master/provider/Forward/widgets/vod.js
+https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/MovieParadise.js
+https://raw.githubusercontent.com/huangxd-/ForwardWidgets/refs/heads/main/widgets/live.js
+https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/TvLive.js
+https://raw.githubusercontent.com/bemarkt/scripts/refs/heads/master/provider/Forward/widgets/podcast.js
