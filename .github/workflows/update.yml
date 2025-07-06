@@ -1,9 +1,9 @@
-name: 自动聚合 Forward Widgets
+name: 拼接 Forward Widgets 合集
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # 每天凌晨3点自动运行
-  workflow_dispatch:      # 支持手动点击触发
+    - cron: '0 3 * * *'  # 每天凌晨3点
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,24 +12,21 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: 安装 jq
-      run: sudo apt-get install -y jq
-
-    - name: 聚合 .fwd 内容
+    - name: 聚合拼接 .fwd 文件
       run: |
-        echo '{"title": "Forward Widgets 合集", "description": "每日自动更新", "widgets": [' > merged.fwd
+        echo '{"title": "Forward Widgets 拼接合集", "description": "自动拼接合并", "widgets": [' > merged.fwd
         first=true
         while read -r url; do
-          echo "正在处理 $url"
+          echo "处理链接: $url"
           raw=$(curl -s "$url")
 
-          # 判断格式是否正常
-          if ! echo "$raw" | jq -e .widgets > /dev/null 2>&1; then
-            echo "⚠️ 跳过无法解析的链接：$url"
+          # 提取 "widgets": [...] 内容
+          widgets=$(echo "$raw" | sed -n '/"widgets"[[:space:]]*:/,/\]/p' | sed '1s/^[^[]*\[//' | sed '$s/\][^]]*$//')
+
+          if [ -z "$widgets" ]; then
+            echo "⚠️ 跳过空或格式异常链接：$url"
             continue
           fi
-
-          content=$(echo "$raw" | jq '.widgets[]')
 
           if [ "$first" = true ]; then
             first=false
@@ -37,14 +34,14 @@ jobs:
             echo "," >> merged.fwd
           fi
 
-          echo "$content" | jq -c '.' >> merged.fwd
+          echo "$widgets" | sed 's/^/  /' >> merged.fwd
         done < sources.txt
-        echo ']}' >> merged.fwd
+        echo "]}" >> merged.fwd
 
     - name: 提交更新
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add merged.fwd
-        git commit -m "每日自动更新 Forward Widgets 合集" || echo "无需更新"
+        git commit -m "自动拼接 Forward Widgets 合集" || echo "无更新"
         git push
