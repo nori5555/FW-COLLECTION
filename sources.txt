@@ -7,4 +7,4 @@ https://raw.githubusercontent.com/pack1r/ForwardWidgets/refs/heads/main/pack1r.f
 https://raw.githubusercontent.com/pack1r/ForwardWidgets/refs/heads/main/pack1r.fwd
 https://raw.githubusercontent.com/Madai-v/ForwardWidgets/refs/heads/main/Widgets.fwd
 https://gist.githubusercontent.com/huangxd-/37aaa8cca9b888b2bed278e83d4432d9/raw/OtherWidgets.fwd
-添加源链接
+
