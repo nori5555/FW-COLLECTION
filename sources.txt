@@ -1,4 +1,4 @@
-https://raw.githubusercontent.com/huangxd-/ForwardWidgets/refs/heads/main/widgets.fwd
+https://raw.githubusercontent.com/huangxd-/ForwardWidgets/main/widgets.fwd
 https://raw.githubusercontent.com/bemarkt/scripts/refs/heads/master/provider/Forward/ti.fwd
 https://raw.githubusercontent.com/bemarkt/scripts/refs/heads/master/provider/Forward/porn.fwd
 https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/forward-widgets.fwd
