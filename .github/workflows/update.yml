@@ -3,7 +3,7 @@ name: 自动聚合 Forward Widgets
 on:
   schedule:
     - cron: '0 3 * * *'  # 每天凌晨3点自动运行
-  workflow_dispatch:      # 支持手动触发
+  workflow_dispatch:      # 支持手动点击触发
 
 jobs:
   build:
@@ -21,16 +21,22 @@ jobs:
         first=true
         while read -r url; do
           echo "正在处理 $url"
-          content=$(curl -s "$url" | jq '.widgets[]' 2>/dev/null)
-          if [ -z "$content" ]; then
-            echo "⚠️ 跳过无效或解析失败链接：$url"
+          raw=$(curl -s "$url")
+
+          # 判断格式是否正常
+          if ! echo "$raw" | jq -e .widgets > /dev/null 2>&1; then
+            echo "⚠️ 跳过无法解析的链接：$url"
             continue
           fi
+
+          content=$(echo "$raw" | jq '.widgets[]')
+
           if [ "$first" = true ]; then
             first=false
           else
             echo "," >> merged.fwd
           fi
+
           echo "$content" | jq -c '.' >> merged.fwd
         done < sources.txt
         echo ']}' >> merged.fwd
