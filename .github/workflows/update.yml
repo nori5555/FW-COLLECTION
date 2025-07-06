@@ -10,38 +10,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-    - name: 聚合拼接 .fwd 文件
+    - name: Set up Python
+      uses: actions/setup-python@v3 # 或者 @v4, @v5，推荐使用最新版本
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
       run: |
-        echo '{"title": "Forward Widgets 拼接合集", "description": "自动拼接合并", "widgets": [' > merged.fwd
-        first=true
-        while read -r url; do
-          echo "处理链接: $url"
-          raw=$(curl -s "$url")
+        python -m pip install --upgrade pip
+        pip install requests
 
-          # 提取 "widgets": [...] 内容
-          widgets=$(echo "$raw" | sed -n '/"widgets"[[:space:]]*:/,/\]/p' | sed '1s/^[^[]*\[//' | sed '$s/\][^]]*$//')
+    - name: Run aggregation script
+      run: python aggregate.py # 如果放在子目录，例如 scripts/，则改为 python scripts/aggregate.py
 
-          if [ -z "$widgets" ]; then
-            echo "⚠️ 跳过空或格式异常链接：$url"
-            continue
-          fi
-
-          if [ "$first" = true ]; then
-            first=false
-          else
-            echo "," >> merged.fwd
-          fi
-
-          echo "$widgets" | sed 's/^/  /' >> merged.fwd
-        done < sources.txt
-        echo "]}" >> merged.fwd
-
-    - name: 提交更新
+    - name: Commit and push if changes
       run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
+        git config user.name "github-actions[bot]" # 使用官方 bot 邮箱
+        git config user.email "github-actions[bot]@users.noreply.github.com"
         git add merged.fwd
-        git commit -m "自动拼接 Forward Widgets 合集" || echo "无更新"
+        git commit -m "chore: Auto-update Forward Widgets collection" || echo "No changes to commit"
         git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
