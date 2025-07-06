@@ -1,0 +1,44 @@
+name: 自动聚合 Forward Widgets
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # 每天凌晨3点自动运行
+  workflow_dispatch:      # 支持手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: 安装 jq
+      run: sudo apt-get install -y jq
+
+    - name: 聚合 .fwd 内容
+      run: |
+        echo '{"title": "Forward Widgets 合集", "description": "每日自动更新", "widgets": [' > merged.fwd
+        first=true
+        while read -r url; do
+          echo "正在处理 $url"
+          content=$(curl -s "$url" | jq '.widgets[]' 2>/dev/null)
+          if [ -z "$content" ]; then
+            echo "⚠️ 跳过无效或解析失败链接：$url"
+            continue
+          fi
+          if [ "$first" = true ]; then
+            first=false
+          else
+            echo "," >> merged.fwd
+          fi
+          echo "$content" | jq -c '.' >> merged.fwd
+        done < sources.txt
+        echo ']}' >> merged.fwd
+
+    - name: 提交更新
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add merged.fwd
+        git commit -m "每日自动更新 Forward Widgets 合集" || echo "无需更新"
+        git push
